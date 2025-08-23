@@ -1,0 +1,71 @@
+/*
+ * Custom Wood Theme - Colores de madera personalizados
+ */
+
+/* Tablero con colores de madera usando CSS puro */
+.custom-wood .cg-board-wrap {
+  background: repeating-conic-gradient(
+    #D2B48C 0deg 90deg,
+    #8B4513 90deg 180deg
+  ) 0 0/25% 25%;
+}
+
+/* Casillas claras - tono madera clara */
+.custom-wood .cg-board square:nth-child(odd) {
+  background-color: #F5DEB3; /* Wheat - madera clara */
+}
+
+/* Casillas oscuras - tono madera oscura */
+.custom-wood .cg-board square:nth-child(even) {
+  background-color: #8B4513; /* SaddleBrown - madera oscura */
+}
+
+/* Alternativa con patrón de tablero más realista */
+.custom-wood .cg-board {
+  background: 
+    linear-gradient(45deg, #D2B48C 25%, transparent 25%), 
+    linear-gradient(-45deg, #D2B48C 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #D2B48C 75%), 
+    linear-gradient(-45deg, transparent 75%, #D2B48C 75%);
+  background-size: 25% 25%;
+  background-position: 0 0, 0 12.5%, 12.5% -12.5%, -12.5% 0px;
+  background-color: #8B4513;
+}
+
+/* Piezas Merida */
+.custom-wood .cg-board piece.pawn.white {
+  background-image: url('images/pieces/merida/wP.svg');
+}
+.custom-wood .cg-board piece.bishop.white {
+  background-image: url('images/pieces/merida/wB.svg');
+}
+.custom-wood .cg-board piece.knight.white {
+  background-image: url('images/pieces/merida/wN.svg');
+}
+.custom-wood .cg-board piece.rook.white {
+  background-image: url('images/pieces/merida/wR.svg');
+}
+.custom-wood .cg-board piece.queen.white {
+  background-image: url('images/pieces/merida/wQ.svg');
+}
+.custom-wood .cg-board piece.king.white {
+  background-image: url('images/pieces/merida/wK.svg');
+}
+.custom-wood .cg-board piece.pawn.black {
+  background-image: url('images/pieces/merida/bP.svg');
+}
+.custom-wood .cg-board piece.bishop.black {
+  background-image: url('images/pieces/merida/bB.svg');
+}
+.custom-wood .cg-board piece.knight.black {
+  background-image: url('images/pieces/merida/bN.svg');
+}
+.custom-wood .cg-board piece.rook.black {
+  background-image: url('images/pieces/merida/bR.svg');
+}
+.custom-wood .cg-board piece.queen.black {
+  background-image: url('images/pieces/merida/bQ.svg');
+}
+.custom-wood .cg-board piece.king.black {
+  background-image: url('images/pieces/merida/bK.svg');
+}

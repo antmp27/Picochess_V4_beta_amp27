@@ -1,0 +1,53 @@
+; Kathlyn the Barbarian - Masters group
+; Adaptation of a profile by Pawel Koziol
+; The Barbarian is a fierce attacker,
+; who will go after your king as soon as possible,
+; in contempt than any positional concern.
+;
+setoption name PawnValue value 100
+setoption name KnightValue value 325
+setoption name BishopValue value 335
+setoption name RookValue value 500
+setoption name QueenValue value 1000
+setoption name KeepPawn value 0
+setoption name KeepKnight value 0
+setoption name KeepBishop value 0
+setoption name KeepRook value 0
+setoption name KeepQueen value 20
+setoption name BishopPair value 50
+setoption name KnightPair value -10
+setoption name ExchangeImbalance value 25
+setoption name KnightLikesClosed value 0
+setoption name RookLikesOpen value 0
+setoption name Material value 100
+setoption name OwnAttack value 150
+setoption name OppAttack value 100
+setoption name OwnMobility value 75
+setoption name OppMobility value 75
+setoption name KingTropism value 100
+setoption name PiecePlacement value 100
+setoption name PiecePressure value 125
+setoption name PassedPawns value 100
+setoption name PawnStructure value 75
+setoption name Lines value 100
+setoption name Outposts value 50
+setoption name PawnShield value 100
+setoption name PawnStorm value 100
+setoption name Forwardness value 100
+setoption name DoubledPawnMg value -12
+setoption name DoubledPawnEg value -24
+setoption name IsolatedPawnMg value -10
+setoption name IsolatedPawnEg value -20
+setoption name IsolatedOnOpenMg value -10
+setoption name BackwardPawnMg value -8
+setoption name BackwardPawnEg value -10
+setoption name BackwardOnOpenMg value -8
+setoption name PstStyle value 0
+setoption name MobilityStyle value 0
+setoption name EvalBlur value 0
+setoption name NpsLimit value 16000
+setoption name BookFilter value 10
+;
+setoption name GuideBookFile value books/guide/ph-gambitbook.bin
+setoption name MainBookFile value books/main/rodent.bin
+ 

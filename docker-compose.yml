@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  picochess:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./games:/app/games
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    
+  # Optional: Add a database service for game storage
+  # postgres:
+  #   image: postgres:13
+  #   environment:
+  #     POSTGRES_DB: picochess
+  #     POSTGRES_USER: picochess
+  #     POSTGRES_PASSWORD: picochess
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+# volumes:
+#   postgres_data:

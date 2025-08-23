@@ -1,0 +1,87 @@
+/* CSS personalizado desde Bootstrap Studio */
+
+/* Aquí pega los estilos exportados desde Bootstrap Studio */
+
+/* Ejemplo de personalización para PicoChess */
+.chess-board-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.game-info-panel {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.clock-display {
+    font-family: 'Courier New', monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.move-list {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.btn-chess {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-chess:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .chess-board-container {
+        padding: 10px;
+        margin: 10px 0;
+    }
+    
+    .clock-display {
+        font-size: 1.5rem;
+    }
+}
+
+/* Animaciones */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.active-player {
+    animation: pulse 2s infinite;
+}
+
+/* Tema oscuro personalizado */
+.dark-theme {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #ecf0f1;
+}
+
+.dark-theme .card {
+    background: rgba(52, 73, 94, 0.9);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #ecf0f1;
+}
+
+.dark-theme .btn-chess {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    border: none;
+    color: white;
+}

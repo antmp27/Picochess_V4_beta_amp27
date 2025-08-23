@@ -1,0 +1,45 @@
+; Nerd - Club group (1500 elo)
+; Adaptation of a profile by Pawel Koziol
+; Particular style: offensive player but not very
+; materialistic and preoccupied with the pawn structure.
+;
+setoption name PawnValue value 100
+setoption name KnightValue value 325
+setoption name BishopValue value 335
+setoption name RookValue value 450
+setoption name QueenValue value 1000
+setoption name KeepPawn value 1
+setoption name KeepKnight value 5
+setoption name KeepBishop value -5
+setoption name KeepRook value 0
+setoption name KeepQueen value 0
+setoption name BishopPair value 50
+setoption name KnightPair value -10
+setoption name ExchangeImbalance value 10
+setoption name KnightLikesClosed value 8
+setoption name RookLikesOpen value 3
+setoption name Material value 100
+setoption name OwnAttack value 120
+setoption name OppAttack value 100
+setoption name OwnMobility value 100
+setoption name OwnMobility value 100
+setoption name OppMobility value 120
+setoption name KingTropism value 20
+setoption name PiecePlacement value 100
+setoption name PiecePressure value 100
+setoption name PassedPawns value 100
+setoption name PawnStructure value 120
+setoption name Lines value 120
+setoption name Outposts value 150
+setoption name PstStyle value 1
+setoption name MobilityStyle value 0
+setoption name NpsLimit value 390
+setoption name EvalBlur value 70
+setoption name Contempt value 0
+setoption name SearchSkill value 10
+setoption name SlowMover value 120
+setoption name Selectivity value 175
+setoption name BookFilter value 20
+;
+setoption name GuideBookFile value books/main/mini.bin
+setoption name MainBookFile value books/main/mini.bin

@@ -1,0 +1,77 @@
+; Tal personality for Rodent III chess engine, version 0.229 or later
+; created by Brendan J. Norman, modified by Pawel Koziol
+; Hommage to Mikhail Tal
+; "My head is filled with sunshine. In the first game 
+; of my match with Botvinnik I will play 1.e4 
+; and I shall win."
+;
+setoption name PawnValueMg = 100
+setoption name KnightValueMg = 325
+setoption name BishopValueMg = 340
+setoption name RookValueMg = 500
+setoption name QueenValueMg = 950
+setoption name PawnValueEg = 101
+setoption name KnightValueEg = 320
+setoption name BishopValueEg = 340
+setoption name RookValueEg = 505
+setoption name QueenValueEg = 960
+setoption name KeepPawn = 8
+setoption name KeepKnight = 10
+setoption name KeepBishop = 10
+setoption name KeepRook = 0
+setoption name KeepQueen = 20
+setoption name BishopPair = 70
+setoption name KnightPair = -10
+setoption name RookPair = -9
+setoption name KnightLikesClosed = 6
+setoption name RookLikesOpen = 3
+setoption name MajorUp = 60
+setoption name MinorUp = 53
+setoption name BothUp = 80
+setoption name ExchangeImbalance = -10
+setoption name MinorVsQueen = 4
+setoption name TwoMinors = 44
+setoption name Material = 48
+setoption name OwnAttack = 450
+setoption name OppAttack = 100
+setoption name OwnMobility = 125
+setoption name OppMobility = 100
+setoption name KingTropism = 80
+setoption name PiecePlacement = 100
+setoption name PiecePressure = 190
+setoption name PassedPawns = 127
+setoption name PawnStructure = 90
+setoption name Lines = 100
+setoption name Outposts = 100
+setoption name PawnShield = 189
+setoption name PawnStorm = 181
+setoption name Forwardness = 0
+setoption name Center = 50
+setoption name DoubledPawnMg = -12
+setoption name DoubledPawnEg = -24
+setoption name IsolatedPawnMg = -10
+setoption name IsolatedPawnEg = -20
+setoption name IsolatedOnOpenMg = -10
+setoption name BackwardPawnMg = -8
+setoption name BackwardPawnEg = -10
+setoption name BackwardOnOpenMg = -8
+setoption name FianchBase = 4
+setoption name Fianchetto = 8
+setoption name ReturningB = 10
+setoption name MinorBehindPawn = 5
+setoption name PawnThreat = 4
+setoption name PawnMass = 100
+setoption name PawnChains = 100
+setoption name PstStyle = 0
+setoption name MobilityStyle = 0
+setoption name NpsLimit = 0
+setoption name EvalBlur = 0
+setoption name Contempt = 5
+setoption name SlowMover = 95
+setoption name Selectivity = 175
+setoption name SearchSkill = 10
+setoption name RiskyDepth = 8
+setoption name BookFilter = 20
+;
+setoption name GuideBookFile value personalities/07_Grandmasters/Mikhail_Tal/ph-tal2.bin
+setoption name MainBookFile value books/hist/_31to80.bin
