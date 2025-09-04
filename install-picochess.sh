@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Installation script for picochess
-#
+# GRACIAS A JOHAN . https://github.com/JohanSjoblom/picochess
 
 # Check for the "pico" parameter, if present skip system upgrade
 SKIP_UPDATE=false
@@ -151,7 +151,7 @@ else
     mkdir -p /opt/picochess
     chown pi:pi /opt/picochess
     cd /opt
-    sudo -u pi git clone https://github.com/JohanSjoblom/picochess
+    sudo -u pi git clone https://github.com/antmp27/Picochess_V4_beta_amp27.git
     chown -R pi:pi /opt/picochess
     cd picochess
 fi
