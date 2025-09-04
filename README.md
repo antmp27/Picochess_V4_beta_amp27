@@ -22,33 +22,7 @@ Requirements
 - Raspberry Pi 3, Pi 4, Pi 5 (aarch64) or a Debian computer (x86_64)
 - RaspiOS Bookworm (latest) 64bit recommended
 
-Quick Installation
-------------------
-Get the installations script, give it execution rights, and run it as sudo. It will clone the repository to /opt/picochess and install the needed services.
-- wget -L https://raw.github.com/JohanSjoblom/Picochess/master/install-picochess.sh
-- chmod a+x install-picochess.sh
-- sudo ./install-picochess.sh
-- reboot and if everything went well Picochess should start as a service
-The script installs the following services in /etc/systemd/system/
-- picochess, main service
-- picochess-update, the service to stay updated
-- obooksrv, opening books window on web page
-- gamesdb, games window on web page
 
-How to stay updated
--------------------
-You can manually update to latest version from within the program. Go to the System, Power menu and select Restart and Update Picochess. If you really want to stay updated you can edit your picochess.ini file and uncomment the line enable-update = True. In this case it will update the code every time you reboot. It will not run a system update at boot, as that takes quite some time. It will only update the picochess code.
-
-How to open the web page and play?
-----------------------------------
-Use localhost in your browser to open the web page. If you are running on another machine replace localhost with the ip address of your Pi4.
-
-How to analyse a PGN game using Picotutor?
-------------------------------------------
-You can upload a PGN game. Go to localhost/upload and chose a PGN file to upload to Picochess. It will ask you for your pi user password. It will load the PGN game into the starting position. Now you can step through the PGN game in Picochess by using the pause button. Finally save the game from the menu if you want to store the evaluations. Games are saved in /opt/picochess/games.
-To upload a game from your mobile phone to Picochess you need to know the ip address of your Pi computer and replace localhost above with the ip address. You also need to be on the same network as your pi computer.
-
-How to enter and analyse a game using Picotutor?
 ------------------------------------------------
 You can use the menu to go to Mode and switch to "Hint On" mode. Now you make moves for both sides. Use the plus and minus button to check the score. When you are done analysing: use the Game Setup from the menu and chose Declare game ending. Your game with picotutor evaluations are saved in /opt/picochess/games/last_game.pgn.
 
