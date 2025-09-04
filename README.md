@@ -3,11 +3,25 @@ PicoChess
 Picochess transforms your Raspberry Pi or any Debian-based computer into a chess computer. It is not a chess engine itself but a manager for the chess engines you choose to use.
 This repository includes Stockfish 17 and Leela Chess Zero (LCZero) as examples. If you want to add more engines you should have a look in the picochess google group. The retro and mame engines like Mephisto works. All special and historical engines might not work.
 
-Features
-========
-- Play via Web Browser. Enjoy chess directly from your browser.
-- Electronic Chess Board support, compatible with DGT e-board, Certabo, Chesslink, Chessnut, and Ichessone for an authentic playing experience. Note that no guarantees can be given that it will work with all of these boards, but the community has worked hard to maintain this possibility. I currently use a DGT e-board myself.
-- DGT Clock Compatibility. Runs on the DGT Pi 3000 electronic clock which becomes an all-in one chess computer.
+
+** Esta es una versión personal de la versión 4 que está realizando Johan en https://github.com/JohanSjoblom/picochess y donde le añado funciones
+nuevas para probarlas **    Por favor, usar bajo su responsabilidad, puede ser que no vayan bien algunas funciones!!!
+
+
+Características
+===============
+- Se puede jugar desde el navegador web gracias al webserver, sin necesidad de tener conectado un tablero de ajedrez compatible.
+
+- Los tableros electrónicos compatibles son: DGT e-board, Certabo, Chesslink, Chessnut y Ichessone.   A esto le he añadido la opción de poder
+ introducir las jugadas desde el teclado de forma: "e2e4 + intro" por lo que posibilita la opción de los tableros creados DIY tipo
+ "SolusChess" de Berger (al que le mando un saludo y le doy las gracias por su tablero).
+
+- DGT Reloj compatible.Clock Compatibility. Funciona en un reloj DGT PI 3000 que lo convierte en un ordenador de ajedrez todo en uno.
+
+- He modificado la visualización del motor de ajedrez Stockfish web local, para que muestre la valoración y primer movimiento mucho más
+visible, con el fin de que se pueda ver más fácil. También he acortado la rama del motor, pues antes daba muchos movimientos.
+
+ 
 
 About This Fork
 ===============
@@ -58,7 +72,7 @@ Installation with more detailed info
 13. Open your web browser on localhost or from another computer using the IP address of your PI. You can change the web port in pocochess.ini
 14. Start playing !
 
-Tailoring: edit the picochess.ini file.
+Edit the picochess.ini file.
 Troubleshooting: check the log in /opt/picochess/logs/picochess.log
 Google group for reporting and discussing: https://groups.google.com/g/picochess
 
