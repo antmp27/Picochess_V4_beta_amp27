@@ -26,18 +26,20 @@ var/
 include/
 build/
 
-# Engine files (large binaries)
-engines/aarch64/old/
-engines/x86_64/old/
+# Engine files (exclude all engine binaries and folders)
+engines/aarch64/
+engines/x86_64/
 engines/mame_emulation/
-engines/pgn_engine/pgn_audio/
+engines/pgn_engine/
 engines/script_engines/
-engines/aarch64/script/
-engines/x86_64/script/
+engines/rodent3/
+engines/rodent4/
 
-# Generated engine files
-engines/x86_64/extra/pgn_game_info.txt
-engines/x86_64/extra/pgn_engine-log.txt
+# Keep only engine configuration files
+!engines/
+!engines/*.md
+!engines/*.txt
+!engines/*.ini
 
 # Installer logs
 pip-log.txt
@@ -116,12 +118,4 @@ manual/*.pdf
 manual/*.epub
 manual/*.pages
 
-# Keep essential engine files
-engines/aarch64/
-!engines/aarch64/engines.ini
-!engines/aarch64/a-stockf.uci
-!engines/aarch64/lc0v0311
-!engines/aarch64/lc0v0311.uci
-!engines/aarch64/LD2.pb.gz
-!engines/aarch64/NNUE/
-!engines/aarch64/favorites.ini
+

@@ -1112,10 +1112,7 @@ function newBoard(fen) {
     updateStatus();
     removeHighlights();
     removeArrow();
-    
-    // Resetear barra de evaluación
-    updateEvaluationBar(0);
-    
+
     if (wasAnalyzing) {
         setTimeout(function() {
             analyze(true);
@@ -1262,66 +1259,6 @@ function receive_message(wsevent) {
     console.log(' ');
 }
 
-function updateEvaluationBar(score) {
-    var container = document.getElementById('evaluation-bar-container');
-    var fill = document.getElementById('evaluation-fill');
-    var valueDisplay = document.getElementById('evaluation-value');
-    
-    if (!container || !fill || !valueDisplay) return;
-    
-    // Limpiar clases anteriores
-    container.classList.remove('eval-white-advantage', 'eval-black-advantage', 'eval-mate');
-    
-    var numericScore = 0;
-    var displayValue = '0.00';
-    var isMate = false;
-    
-    if (typeof score === 'string' && score.includes('#')) {
-        // Es mate
-        isMate = true;
-        var mateIn = parseInt(score.replace('#', ''));
-        displayValue = score;
-        numericScore = mateIn > 0 ? 5 : -5; // Valor extremo para mate
-        container.classList.add('eval-mate');
-    } else {
-        numericScore = parseFloat(score) || 0;
-        displayValue = numericScore.toFixed(2);
-    }
-    
-    // Calcular porcentaje para la barra horizontal (limitado entre -3 y +3 peones)
-    var clampedScore = Math.max(-3, Math.min(3, numericScore));
-    var percentage = (Math.abs(clampedScore) / 3) * 40; // 40% es el máximo
-    
-    if (numericScore > 0) {
-        // Ventaja blancas - la barra crece hacia la derecha desde el centro
-        container.classList.add('eval-white-advantage');
-        fill.style.width = (50 + percentage) + '%';
-        fill.style.left = '0';
-        fill.style.background = 'linear-gradient(to right, #ffffff, #e9ecef)';
-        fill.style.borderRadius = '3px 0 0 3px';
-    } else if (numericScore < 0) {
-        // Ventaja negras - la barra crece hacia la izquierda desde el centro
-        container.classList.add('eval-black-advantage');
-        fill.style.width = (50 + percentage) + '%';
-        fill.style.left = (50 - percentage) + '%';
-        fill.style.background = 'linear-gradient(to left, #343a40, #000000)';
-        fill.style.borderRadius = '0 3px 3px 0';
-    } else {
-        // Posición equilibrada
-        fill.style.width = '50%';
-        fill.style.left = '0';
-        fill.style.background = '#6c757d';
-        fill.style.borderRadius = '3px 0 0 3px';
-    }
-    
-    // Transición suave del texto
-    valueDisplay.style.opacity = '0.5';
-    setTimeout(function() {
-        valueDisplay.textContent = displayValue;
-        valueDisplay.style.opacity = '1';
-    }, 200);
-}
-
 function formatEngineOutput(line) {
     if (line.search('depth') > 0 && line.search('currmove') < 0) {
         var analysis_game = new Chess();
@@ -1361,16 +1298,11 @@ function formatEngineOutput(line) {
             }
         }
         
-        // Actualizar la barra de evaluación solo para la primera línea (multipv 1 o 0)
-        if (multipv <= 1) {
-            updateEvaluationBar(score);
-        }
-
         var pv_index = tokens.indexOf('pv') + 1;
 
         var pv_out = tokens.slice(pv_index);
-        // Limita la PV a máximo 7 movimientos para evitar cadenas muy largas
-        var MAX_PV_MOVES = 7;
+        // Limita la PV a máximo 8 movimientos para evitar cadenas muy largas
+        var MAX_PV_MOVES = 8;
         pv_out = pv_out.slice(0, MAX_PV_MOVES);
         var first_move = pv_out[0];
         for (var i = 0; i < pv_out.length; i++) {
@@ -1497,8 +1429,6 @@ function importPv(multipv) {
     updateStatus();
 }
 
-
-
 function stockfishPNACLModuleDidLoad() {
     window.StockfishModule = document.getElementById('stockfish_module');
     window.StockfishModule.postMessage('uci');
@@ -1543,14 +1473,6 @@ function stopAnalysis() {
             console.warn(err);
         }
     }
-    
-    // Limpiar las líneas de análisis
-    for (var i = 1; i <= window.multipv; i++) {
-        $('#pv_' + i).html('');
-    }
-    
-    // Resetear barra de evaluación
-    updateEvaluationBar(0);
 }
 
 function getCountPrevMoves(node) {
@@ -1635,10 +1557,6 @@ function analyze(position_update) {
         window.stockfish.postMessage('go infinite');
     }
 }
-
-
-
-
 
 function updateDGTPosition(data) {
     if (!goToPosition(data.fen) || data.play === 'reload') {
