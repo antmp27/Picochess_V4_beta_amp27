@@ -4435,11 +4435,3 @@ class DgtMenu(object):
     def get_current_text(self):
         """Return the current text."""
         return self.current_text
-
-    async def execute_new_game(self):
-        """Execute new game directly from web interface."""
-        pos960 = 518
-        await Observable.fire(Event.NEW_GAME(pos960=pos960))
-        text = await self._fire_dispatchdgt(self.dgttranslate.text("B10_okgamenew"))
-        await self._fire_event(Event.PICOCOMMENT(picocomment="ok"))
-        return text

@@ -1,0 +1,36 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="typing_extensions" />
+          <option value="bluepy" />
+          <option value="ConfigArgParse" />
+          <option value="Flask" />
+          <option value="paramiko" />
+          <option value="pyserial" />
+          <option value="chess" />
+          <option value="pyOpenSSL" />
+          <option value="requests" />
+          <option value="spur" />
+          <option value="tornado" />
+          <option value="configobj" />
+          <option value="geopy" />
+          <option value="astral" />
+          <option value="pydub" />
+          <option value="pygame" />
+          <option value="pam" />
+          <option value="six" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="chess.svg" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

@@ -1,8 +1,0 @@
-{
-    "transport": "eboard.chesslink.chess_link_bluepy",
-    "address": "34:81:f4:89:5d:f3",
-    "orientation": true,
-    "btle_iface": 0,
-    "autodetect": true,
-    "protocol_debug": false
-}

@@ -208,10 +208,10 @@ var bookDataTable = $('#BookTable').DataTable({
         [1, 'desc']
     ],
     'columnDefs': [{
-        className: 'dt-center zero-border-right bookMoves book-compact',
+        className: 'dt-center zero-border-right bookMoves',
         'targets': 0
     }, {
-        className: 'dt-right zero-border-right book-compact',
+        className: 'dt-right zero-border-right',
         'targets': 1
     }],
     'ajax': {
@@ -691,12 +691,8 @@ var updateStatus = function () {
     }
 
     boardStatusEl.html(status);
-    
-    // Continuar análisis automáticamente si está activo
     if (window.analysis) {
-        setTimeout(function() {
-            analyze(true);
-        }, 100);
+        analyze(true);
     }
 
     dataTableFen = fen;
@@ -732,6 +728,7 @@ function toColor(chess) {
 }
 
 var onSnapEnd = async function (source, target) {
+    stopAnalysis();
     var tmpGame = createGamePointer();
 
     if (!currentPosition) {
@@ -751,13 +748,6 @@ var onSnapEnd = async function (source, target) {
         promotion: move.promotion ? move.promotion : ''
     }, function (data) { });
     updateStatus();
-    
-    // Forzar análisis después del movimiento
-    if (window.analysis) {
-        setTimeout(function() {
-            analyze(true);
-        }, 100);
-    }
 };
 
 async function promotionDialog(ucimove) {
@@ -1096,7 +1086,6 @@ function download() {
 }
 
 function newBoard(fen) {
-    var wasAnalyzing = window.analysis;
     stopAnalysis();
 
     currentPosition = {};
@@ -1112,16 +1101,6 @@ function newBoard(fen) {
     updateStatus();
     removeHighlights();
     removeArrow();
-
-    if (wasAnalyzing) {
-        setTimeout(function() {
-            analyze(true);
-        }, 200);
-    }
-}
-
-function newGame() {
-    $.post('/channel', { action: 'new_game' }, function (data) { });
 }
 
 function clockButton0() {
@@ -1159,7 +1138,6 @@ function clockButtonPower() {
 }
 
 function goToPosition(fen) {
-    var wasAnalyzing = window.analysis;
     stopAnalysis();
     currentPosition = fenHash[fen];
     if (!currentPosition) {
@@ -1167,11 +1145,6 @@ function goToPosition(fen) {
     }
     updateChessGround();
     updateStatus();
-    if (wasAnalyzing) {
-        setTimeout(function() {
-            analyze(true);
-        }, 200);
-    }
     return true;
 }
 
@@ -1183,39 +1156,24 @@ function goToGameFen() {
 
 function goToStart() {
     removeHighlights();
-    var wasAnalyzing = window.analysis;
     stopAnalysis();
     currentPosition = gameHistory;
     updateChessGround();
     updateStatus();
-    
-    if (wasAnalyzing) {
-        setTimeout(function() {
-            analyze(true);
-        }, 200);
-    }
 }
 
 function goToEnd() {
     removeHighlights();
-    var wasAnalyzing = window.analysis;
     stopAnalysis();
     if (fenHash.last) {
         currentPosition = fenHash.last;
         updateChessGround();
     }
     updateStatus();
-    
-    if (wasAnalyzing) {
-        setTimeout(function() {
-            analyze(true);
-        }, 200);
-    }
 }
 
 function goForward() {
     removeHighlights();
-    var wasAnalyzing = window.analysis;
     stopAnalysis();
     if (currentPosition && currentPosition.variations[0]) {
         currentPosition = currentPosition.variations[0];
@@ -1224,27 +1182,16 @@ function goForward() {
         }
     }
     updateStatus();
-    if (wasAnalyzing) {
-        setTimeout(function() {
-            analyze(true);
-        }, 200);
-    }
 }
 
 function goBack() {
     removeHighlights();
-    var wasAnalyzing = window.analysis;
     stopAnalysis();
     if (currentPosition && currentPosition.previous) {
         currentPosition = currentPosition.previous;
         updateChessGround();
     }
     updateStatus();
-    if (wasAnalyzing) {
-        setTimeout(function() {
-            analyze(true);
-        }, 200);
-    }
 }
 
 function boardFlip() {
@@ -1297,12 +1244,12 @@ function formatEngineOutput(line) {
                 score = '<' + score;
             }
         }
-        
+
         var pv_index = tokens.indexOf('pv') + 1;
 
         var pv_out = tokens.slice(pv_index);
-        // Limita la PV a máximo 8 movimientos para evitar cadenas muy largas
-        var MAX_PV_MOVES = 8;
+////////////////////////////////////////////////////////////////////////////////////////
+        var MAX_PV_MOVES = 8;                        // *** Limita PV max 8 movimientos.
         pv_out = pv_out.slice(0, MAX_PV_MOVES);
         var first_move = pv_out[0];
         for (var i = 0; i < pv_out.length; i++) {
@@ -1327,7 +1274,7 @@ function formatEngineOutput(line) {
             turn_sep = '..';
         }
 
-        // Determinar clase de puntuación
+// Determinar clase de puntuacion
         var scoreClass = 'score-display';
         var numericScore = parseFloat(score);
         if (String(score).includes('#')) {
@@ -1341,12 +1288,12 @@ function formatEngineOutput(line) {
         output = '<div class="list-group-item">';
         output += '<div class="analysis-line-compact">';
         
-        // Puntuación (siempre en relación al blanco)
+// Puntuacion (siempre en relacion al blanco)
         if (score !== null) {
             output += '<span class="' + scoreClass + '">' + score + '</span>';
         }
         
-        // Primer movimiento destacado
+// Primer movimiento destacado
         if (history.length > 0) {
             var firstMoveText = '';
             if ((start_move_num) % 2 === 1) {
@@ -1358,7 +1305,7 @@ function formatEngineOutput(line) {
             output += '<span class="first-move">' + firstMoveText + '</span>';
         }
         
-        // Continuación de la línea (más discreta)
+// Continuacion de la linea (mas discreta)
         if (history.length > 1) {
             var continuationText = '';
             for (i = 1; i < history.length; ++i) {
@@ -1370,7 +1317,7 @@ function formatEngineOutput(line) {
             output += '<span class="continuation-moves">' + continuationText.trim() + '</span>';
         }
         
-        // Profundidad al final
+// Profundidad al final
         output += '<span class="depth-display">d' + depth + '</span>';
         
         output += '</div></div>';
@@ -1382,28 +1329,53 @@ function formatEngineOutput(line) {
         return line;
     }
 }
+////////////////////////////////////////////////////////////////////////////////////////
 
 function multiPvIncrease() {
-    window.multipv += 1;
-    
-    var new_div_str = "<div id=\"pv_" + window.multipv + "\"  style=\"margin-top: 0px; margin-left: 0px; margin-bottom: 3vh;\"></div>";
-    $("#pv_output").append(new_div_str);
-    
-    $('#engineMultiPVStatus').html(window.multipv + (window.multipv > 1 ? ' lines' : ' line'));
-    
-    if (window.analysis) {
-        analyze(true);
+    if (window.stockfish) {
+        window.multipv += 1;
+
+        if (window.stockfish) {
+            window.stockfish.postMessage('setoption name multipv value ' + window.multipv);
+            if (window.analysis) {
+                window.stockfish.postMessage('stop');
+                window.stockfish.postMessage('go infinite');
+            }
+            else {
+                $('#engineMultiPVStatus').html(window.multipv + (window.multipv > 1 ? ' lines' : ' line'));
+            }
+        }
+
+        var new_div_str = "<div id=\"pv_" + window.multipv + "\"  style=\"margin-top: 0px; margin-left: 12px; margin-bottom: 3vh;\"></div>";
+        $("#pv_output").append(new_div_str);
+
+        if (!window.StockfishModule) {
+            // Need to restart web worker as its not Chrome
+            stopAnalysis();
+            analyze(true);
+        }
     }
 }
 
 function multiPvDecrease() {
     if (window.multipv > 1) {
         $('#pv_' + window.multipv).remove();
+
         window.multipv -= 1;
-        
-        $('#engineMultiPVStatus').html(window.multipv + (window.multipv > 1 ? ' lines' : ' line'));
-        
-        if (window.analysis) {
+        if (window.stockfish) {
+            window.stockfish.postMessage('setoption name multipv value ' + window.multipv);
+            if (window.analysis) {
+                window.stockfish.postMessage('stop');
+                window.stockfish.postMessage('go infinite');
+            }
+            else {
+                $('#engineMultiPVStatus').html(window.multipv + (window.multipv > 1 ? ' lines' : ' line'));
+            }
+        }
+
+        if (!window.StockfishModule) {
+            // Need to restart web worker as its not Chrome
+            stopAnalysis();
             analyze(true);
         }
     }
@@ -1427,6 +1399,10 @@ function importPv(multipv) {
     }
     updateChessGround();
     updateStatus();
+}
+
+function analyzePressed() {
+    analyze(false);
 }
 
 function stockfishPNACLModuleDidLoad() {
@@ -1459,11 +1435,7 @@ function loadNaclStockfish() {
 function stopAnalysis() {
     if (!window.StockfishModule) {
         if (window.stockfish) {
-            try {
-                window.stockfish.postMessage('stop');
-            } catch(e) {}
             window.stockfish.terminate();
-            window.stockfish = null;
         }
     } else {
         try {
@@ -1505,24 +1477,18 @@ function getPreviousMoves(node, format) {
 
 function analyze(position_update) {
     if (!position_update) {
-        var analyzeText = $('#AnalyzeText');
-        var analyzeBtn = $('#analyzeBtn');
-        
-        if (analyzeText.text().includes('Analyze')) {
+        if ($('#AnalyzeText').text() === 'Analyze') {
             window.analysis = true;
-            analyzeText.html('<i class="fa fa-stop"></i> Stop');
-            analyzeBtn.addClass('stop-mode');
+            $('#AnalyzeText').text('Stop');
         }
         else {
-            analyzeText.html('<i class="fa fa-cog"></i> Analyze');
-            analyzeBtn.removeClass('stop-mode');
+            $('#AnalyzeText').text('Analyze');
             stopAnalysis();
             window.analysis = false;
             $('#engineStatus').html('');
             return;
         }
     }
-    
     var moves;
     if (currentPosition === undefined) {
         moves = '';
@@ -1530,11 +1496,7 @@ function analyze(position_update) {
     else {
         moves = getPreviousMoves(currentPosition);
     }
-    
     if (!window.StockfishModule) {
-        if (window.stockfish) {
-            window.stockfish.terminate();
-        }
         window.stockfish = new Worker('/static/js/stockfish.js');
         window.stockfish.onmessage = function (event) {
             handleMessage(event);
@@ -1550,12 +1512,9 @@ function analyze(position_update) {
     if (setupBoardFen !== START_FEN) {
         startpos = 'fen ' + setupBoardFen;
     }
-    
-    if (window.stockfish) {
-        window.stockfish.postMessage('position ' + startpos + ' moves ' + moves);
-        window.stockfish.postMessage('setoption name multipv value ' + window.multipv);
-        window.stockfish.postMessage('go infinite');
-    }
+    window.stockfish.postMessage('position ' + startpos + ' moves ' + moves);
+    window.stockfish.postMessage('setoption name multipv value ' + window.multipv);
+    window.stockfish.postMessage('go infinite');
 }
 
 function updateDGTPosition(data) {
@@ -1652,14 +1611,16 @@ if (location.hostname === '127.0.0.1' || location.hostname === 'localhost') {
     $('#downloadBtn').on('click', download);
 }
 
-$('#analyzeBtn').on('click', function() {
-    console.log('Analyze button clicked');
-    analyze(false);
-});
+$('#analyzeBtn').on('click', analyzePressed);
 
-// Habilitar botones + y - para múltiples líneas del motor
-$('#analyzePlus').on('click', multiPvIncrease);
-$('#analyzeMinus').on('click', multiPvDecrease);
+// disable plus/minus analysis on device as this currently causes the engine to load multiple times
+if (location.hostname === '127.0.0.1' || location.hostname === 'localhost') {
+    $('#analyzePlus').hide()
+    $('#analyzeMinus').hide()
+} else {
+    $('#analyzePlus').on('click', multiPvIncrease);
+    $('#analyzeMinus').on('click', multiPvDecrease);
+}
 
 $('#ClockBtn0').on('click', clockButton0);
 $('#ClockBtn1').on('click', clockButton1);
@@ -1667,11 +1628,6 @@ $('#ClockBtn2').on('click', clockButton2);
 $('#ClockBtn3').on('click', clockButton3);
 $('#ClockBtn4').on('click', clockButton4);
 $('#ClockLeverBtn').on('click', toggleLeverButton);
-
-// Botón New Game
-$('#new-game-btn').on('click', function() {
-    newGame();
-});
 
 $("#ClockBtn0").mouseup(function () {
     btn = $(this);
@@ -1706,8 +1662,6 @@ $(function () {
     });
     window.engine_lines = {};
     window.multipv = 1;
-    window.analysis = false;
-    window.stockfish = null;
 
     $(document).keydown(function (e) {
         if (e.keyCode === 39) { // right arrow
@@ -1754,21 +1708,9 @@ $(function () {
                     if (data.play === 'review') {
                         highlightBoard(data.move, 'review');
                     }
-                    // Continuar análisis después de actualización
-                    if (window.analysis) {
-                        setTimeout(function() {
-                            analyze(true);
-                        }, 200);
-                    }
                     break;
                 case 'Game':
-                    var wasAnalyzing = window.analysis;
                     newBoard(data.fen);
-                    if (wasAnalyzing) {
-                        setTimeout(function() {
-                            analyze(true);
-                        }, 300);
-                    }
                     break;
                 case 'Message':
                     boardStatusEl.html(data.msg);

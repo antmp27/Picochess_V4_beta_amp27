@@ -136,9 +136,6 @@ class ChannelHandler(ServerRequestHandler):
             await Observable.fire(Event.REMOTE_ROOM(inside=inside))
         elif action == "command":
             await self.process_console_command(self.get_argument("command"))
-        elif action == "new_game":
-            await Observable.fire(Event.NEW_GAME(pos960=518))
-            await Observable.fire(Event.PICOCOMMENT(picocomment="ok"))
 
 
 class EventHandler(WebSocketHandler):
