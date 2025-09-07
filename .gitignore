@@ -6,6 +6,9 @@ manual/PicoChess V3.0.pages
 manual/PicoChess V3.0.pdf
 manual/PicoChess V3.epub
 
+# Carpeta de engines (archivos binarios grandes)
+engines/
+
 # Archivos de logs
 logs/
 *.log
