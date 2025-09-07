@@ -1,0 +1,159 @@
+/*
+ * Tema Madera Realista - Simulación de tablero de madera natural
+ */
+
+/* Contenedor del tablero con textura de madera */
+.realistic-wood .cg-board-wrap {
+  background: linear-gradient(45deg, 
+    #D4A574 0%, 
+    #C19A6B 25%, 
+    #B8956A 50%, 
+    #A68B5B 75%, 
+    #8B7355 100%
+  );
+  border: 3px solid #654321;
+  box-shadow: 
+    inset 0 0 20px rgba(139, 115, 85, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Casillas claras - Madera de arce clara */
+.realistic-wood .cg-board square.light {
+  background: linear-gradient(135deg, 
+    #F5E6D3 0%, 
+    #E8D5B7 25%, 
+    #DCC9A3 50%, 
+    #D4C2A0 75%, 
+    #C8B99C 100%
+  );
+  box-shadow: inset 1px 1px 3px rgba(255, 255, 255, 0.3);
+}
+
+/* Casillas oscuras - Madera de nogal */
+.realistic-wood .cg-board square.dark {
+  background: linear-gradient(135deg, 
+    #8B4513 0%, 
+    #A0522D 25%, 
+    #8B4513 50%, 
+    #654321 75%, 
+    #5D4037 100%
+  );
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto de veta de madera en las casillas */
+.realistic-wood .cg-board square::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    rgba(139, 69, 19, 0.1) 1px,
+    transparent 2px,
+    transparent 8px
+  );
+  pointer-events: none;
+}
+
+/* Casillas seleccionadas */
+.realistic-wood .cg-board square.selected {
+  background: radial-gradient(circle, 
+    rgba(255, 215, 0, 0.4) 0%, 
+    rgba(255, 215, 0, 0.2) 50%, 
+    transparent 100%
+  ) !important;
+  box-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.6),
+    inset 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+/* Casillas de destino válido */
+.realistic-wood .cg-board square.move-dest {
+  background: radial-gradient(circle, 
+    rgba(34, 139, 34, 0.3) 0%, 
+    rgba(34, 139, 34, 0.1) 50%, 
+    transparent 100%
+  ) !important;
+}
+
+/* Última jugada */
+.realistic-wood .cg-board square.last-move {
+  background: radial-gradient(circle, 
+    rgba(255, 165, 0, 0.3) 0%, 
+    rgba(255, 165, 0, 0.1) 50%, 
+    transparent 100%
+  ) !important;
+}
+
+/* Piezas con sombra para mayor realismo */
+.realistic-wood .cg-board piece {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Piezas blancas */
+.realistic-wood .cg-board piece.pawn.white {
+  background-image: url('images/pieces/merida/wP.svg');
+}
+.realistic-wood .cg-board piece.bishop.white {
+  background-image: url('images/pieces/merida/wB.svg');
+}
+.realistic-wood .cg-board piece.knight.white {
+  background-image: url('images/pieces/merida/wN.svg');
+}
+.realistic-wood .cg-board piece.rook.white {
+  background-image: url('images/pieces/merida/wR.svg');
+}
+.realistic-wood .cg-board piece.queen.white {
+  background-image: url('images/pieces/merida/wQ.svg');
+}
+.realistic-wood .cg-board piece.king.white {
+  background-image: url('images/pieces/merida/wK.svg');
+}
+
+/* Piezas negras */
+.realistic-wood .cg-board piece.pawn.black {
+  background-image: url('images/pieces/merida/bP.svg');
+}
+.realistic-wood .cg-board piece.bishop.black {
+  background-image: url('images/pieces/merida/bB.svg');
+}
+.realistic-wood .cg-board piece.knight.black {
+  background-image: url('images/pieces/merida/bN.svg');
+}
+.realistic-wood .cg-board piece.rook.black {
+  background-image: url('images/pieces/merida/bR.svg');
+}
+.realistic-wood .cg-board piece.queen.black {
+  background-image: url('images/pieces/merida/bQ.svg');
+}
+.realistic-wood .cg-board piece.king.black {
+  background-image: url('images/pieces/merida/bK.svg');
+}
+
+/* Coordenadas del tablero */
+.realistic-wood .cg-board coords {
+  color: #654321;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* Bordes del tablero con efecto de madera tallada */
+.realistic-wood .cg-board-wrap::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 2px solid #8B4513;
+  border-radius: 4px;
+  box-shadow: 
+    0 0 0 1px #D2B48C,
+    0 0 0 3px #8B4513,
+    0 6px 12px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
